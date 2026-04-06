@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(wc -l /home/perry/Coding/lukam/js/*.js /home/perry/Coding/lukam/css/styles.css /home/perry/Coding/lukam/index.html)"
+    ]
+  }
+}

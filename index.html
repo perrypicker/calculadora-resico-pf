@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora RESICO PF</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1>Calculadora <span>RESICO PF</span></h1>
+    <p>Pago provisional mensual · ISR + IVA · Todo en tu navegador, sin servidores</p>
+  </div>
+</header>
+
+<main>
+
+  <!-- ── Configuración ── -->
+  <section class="card">
+    <div class="config-row">
+      <div class="field">
+        <label for="rfc-input">Tu RFC</label>
+        <input id="rfc-input" type="text" placeholder="XAXX010101000"
+               maxlength="13" spellcheck="false" autocomplete="off"
+               style="text-transform:uppercase">
+      </div>
+      <div class="field">
+        <label for="month-sel">Mes</label>
+        <select id="month-sel">
+          <option value="1">Enero</option>
+          <option value="2">Febrero</option>
+          <option value="3">Marzo</option>
+          <option value="4">Abril</option>
+          <option value="5">Mayo</option>
+          <option value="6">Junio</option>
+          <option value="7">Julio</option>
+          <option value="8">Agosto</option>
+          <option value="9">Septiembre</option>
+          <option value="10">Octubre</option>
+          <option value="11">Noviembre</option>
+          <option value="12">Diciembre</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="year-sel">Año</label>
+        <select id="year-sel"></select>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Zona de arrastre ── -->
+  <section class="card">
+    <div id="drop-zone">
+      <svg width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.5"
+           stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+        <path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+      </svg>
+      <p>Arrastra y suelta tus CFDIs en XML aquí</p>
+      <p class="sub">Emitidos (ingresos) y recibidos (gastos) · Haz clic para seleccionar archivos</p>
+    </div>
+    <div id="cfdi-bar" class="cfdi-bar hidden">
+      <span id="bar-count"></span>
+      <button id="clear-btn">Limpiar todo</button>
+    </div>
+  </section>
+
+  <!-- ── Mensajes ── -->
+  <div id="messages"></div>
+
+  <!-- ── Resultados ── -->
+  <div id="results" class="hidden">
+
+    <!-- Tablas de CFDIs -->
+    <section class="card">
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="ingresos">Ingresos emitidos</button>
+        <button class="tab-btn"        data-tab="egresos">Egresos / Gastos recibidos</button>
+      </div>
+
+      <div id="tab-ingresos" class="tab-pane">
+        <table>
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Folio</th>
+              <th>Cliente / Receptor</th>
+              <th class="r">Subtotal</th>
+              <th class="r">IVA</th>
+              <th class="r">ISR ret.</th>
+              <th class="r">IVA ret.</th>
+              <th class="r">Total</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-ingresos"></tbody>
+          <tfoot id="tfoot-ingresos"></tfoot>
+        </table>
+      </div>
+
+      <div id="tab-egresos" class="tab-pane hidden">
+        <table>
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Folio</th>
+              <th>Proveedor / Emisor</th>
+              <th class="r">Subtotal</th>
+              <th class="r">IVA</th>
+              <th class="r">Total</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-egresos"></tbody>
+          <tfoot id="tfoot-egresos"></tfoot>
+        </table>
+      </div>
+    </section>
+
+    <!-- ISR + IVA -->
+    <div class="dos-col">
+
+      <section class="card">
+        <h2>ISR — RESICO PF</h2>
+        <div id="isr-panel"></div>
+      </section>
+
+      <section class="card">
+        <h2>IVA</h2>
+        <div id="iva-panel"></div>
+      </section>
+
+    </div>
+
+    <!-- Resumen final -->
+    <section class="card resumen-card">
+      <div id="resumen-panel"></div>
+    </section>
+
+  </div><!-- /#results -->
+
+</main>
+
+<footer>
+  <p>Los resultados son orientativos · Tabla ISR RESICO Art. 113-E LISR ·
+     Ningún dato se almacena ni se envía a servidores</p>
+</footer>
+
+<script src="js/cfdi-parser.js"></script>
+<script src="js/tax-calculator.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
