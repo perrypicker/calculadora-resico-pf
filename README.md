@@ -45,7 +45,7 @@ Los CFDIs de **nómina (N)** y **traslado (T)** se ignoran automáticamente.
 La aplicación es HTML, CSS y JavaScript vanilla sin dependencias externas ni proceso de compilación.
 
 ```
-lukam/
+calculadora-resico-pf/
 ├── index.html              # Estructura y punto de entrada
 ├── css/
 │   └── styles.css          # Estilos
